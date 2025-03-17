@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using WebPiagetNovo.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<WebPiagetNovoContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("WebPiagetNovoContext") ?? throw new InvalidOperationException("Connection string 'WebPiagetNovoContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
